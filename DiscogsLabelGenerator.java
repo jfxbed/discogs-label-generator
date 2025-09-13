@@ -14,26 +14,34 @@ public class DiscogsLabelGenerator {
     public static String line1 = "Established 2024";
     public static String line2 = "";
     public static String line3 = "";
+    public static String filterdate = "";
 
 
     public static void main(String[] args) {
         System.out.println("#############DiscogsLabelGenerator###############");
-
         for (int i = 0; i < args.length ; i++){
             if (i == 0){
                 path = args[i];
-            } else if (args[i] == "-name"){
-                name = args[i+1] + "'s";
+            } else if (args[i].equals("-name")){
+                name = args[i+1];
+                if (name.substring(name.length() - 1).equals("s")){
+                    name+="'";
+                } else {
+                    name+="'s";
+                }
                 System.out.println("Name Flag Accepted");
-            } else if (args[i] == "-line1"){
+            } else if (args[i].equals("-line1")){
                 line2 = args[i+1];
                 System.out.println("Line1 Flag Accepted");
-            } else if (args[i] == "-line2"){
+            } else if (args[i].equals("-line2")){
                 line2 = args[i+1];
                 System.out.println("Line2 Flag Accepted");
-            } else if (args[i] == "-line3"){
+            } else if (args[i].equals("-line3")){
                 line3 = args[i+1];
                 System.out.println("Line3 Flag Accepted");
+            } else if (args[i].equals("-filterdate")){
+                filterdate = args[i+1];
+                System.out.println("filterdate Flag Accepted");
             }
         }
 
@@ -50,7 +58,7 @@ public class DiscogsLabelGenerator {
         for (Record r : collection){
             LabelGenerator g = new LabelGenerator(r);
             current.append(g.getLabel(name, line1, line2, line3));
-            System.out.printf("Generated Label No. %d \r", count);
+            System.out.printf("Generated Label No. %d \n", count);
             count++;
             if ((count % 50) == 0) {
                 lablelLists.add(current.toString());
