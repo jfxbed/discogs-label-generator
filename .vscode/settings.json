@@ -1,9 +1,0 @@
-{
-    "java.project.sourcePaths": [
-        "libs",
-        "."
-    ],
-    "java.project.referencedLibraries": [
-        "/home/jfxbed/Documents/Personal/Discogs Label Generator/libs/commons-csv-1.10.0.jar"
-    ]
-}

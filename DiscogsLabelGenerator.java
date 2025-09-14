@@ -11,7 +11,7 @@ import java.util.HashSet;
 public class DiscogsLabelGenerator {
     public static String path = null;
     public static String name = "";
-    public static String line1 = "Established 2024";
+    public static String line1 = "Established 2025";
     public static String line2 = "";
     public static String line3 = "";
     public static String filterdate = "";
