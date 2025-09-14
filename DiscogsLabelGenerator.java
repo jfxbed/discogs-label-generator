@@ -31,7 +31,7 @@ public class DiscogsLabelGenerator {
                 }
                 System.out.println("Name Flag Accepted");
             } else if (args[i].equals("-line1")){
-                line2 = args[i+1];
+                line1 = args[i+1];
                 System.out.println("Line1 Flag Accepted");
             } else if (args[i].equals("-line2")){
                 line2 = args[i+1];
@@ -51,7 +51,7 @@ public class DiscogsLabelGenerator {
         }
 
         CSVReader read = new CSVReader(path);
-        HashSet<Record> collection = read.getRecords();
+        HashSet<Record> collection = read.getRecords(filterdate);
         HashSet<String> lablelLists = new HashSet<String>();
         StringBuilder current = new StringBuilder();
         int count = 0;

@@ -28,7 +28,7 @@ public class CSVReader {
      * 
      * @return A HashSet of Person Objects.
      **/
-    public HashSet<Record> getRecords(){
+    public HashSet<Record> getRecords(String filterDate){
         try (Reader in = new FileReader(path);){
             CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
                 .setSkipHeaderRecord(true)
@@ -36,7 +36,8 @@ public class CSVReader {
 
             HashSet<Record> records = csvFormat.parse(in)
                 .stream()
-                .map(s -> new Record( ( (s.get(2).length() > 35) ? s.get(2).substring(0,35) + "...": s.get(2) ), ( (s.get(1).length() > 35) ? s.get(1).substring(0,35) + "..." : s.get(1) ), s.get(3), s.get(6), s.get(4), s.get(0).split(",")[0], s.get(9).substring(0,9), s.get(10), s.get(11)))
+                .map(s -> new Record( ( (s.get(2).length() > 35) ? s.get(2).substring(0,35) + "...": s.get(2) ), ( (s.get(1).length() > 35) ? s.get(1).substring(0,35) + "..." : s.get(1) ), s.get(3), s.get(6), s.get(4), s.get(0).split(",")[0], s.get(9).substring(0,10), s.get(10), s.get(11)))
+                .filter(c -> this.filterDate(c, filterDate))
                 .collect(Collectors.toCollection(HashSet::new));  
             return records;
         } catch (Exception e){
@@ -45,6 +46,17 @@ public class CSVReader {
             System.exit(0);
         }
         return null;
+    }
+
+    private boolean filterDate(Record rec, String filterDateStr){
+        if (rec.datetAdded().matches("\\d{4}-\\d{2}-\\d{2}")){
+            if (filterDateStr.equals("")) return true;
+            int res = rec.datetAdded().compareTo(filterDateStr);
+            if (res >= 0){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
