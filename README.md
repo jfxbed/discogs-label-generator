@@ -1,5 +1,5 @@
 # discogs-label-generator
-Java Program to generate PDF Labels with information about each record in a collection.
+Java Program to generate PDF Labels with information about each record in a collection. Labels are generated in sets of 50, and rendered using [Labelary's label API](https://labelary.com/service.html)
 
 # Usage
 Compile using `export CLASSPATH=./libs/*:./ && javac *.java`  
